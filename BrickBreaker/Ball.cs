@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Media;
 
 namespace BrickBreaker
 {
@@ -8,6 +9,8 @@ namespace BrickBreaker
     {
         public int x, y, xSpeed, ySpeed, size;
         public Color colour;
+
+        SoundPlayer paddleCollide = new SoundPlayer(Properties.Resources.paddleCollision);
 
         public static Random rand = new Random();
 
@@ -83,6 +86,8 @@ namespace BrickBreaker
 
             if (ballRec.IntersectsWith(paddleRec))
             {
+                paddleCollide.Play();
+
                 if (x < p.x + p.width * 4 / 8) // divide the paddle into 8 sections with different angles of ball launch
                 {
                     ySpeed = -5;

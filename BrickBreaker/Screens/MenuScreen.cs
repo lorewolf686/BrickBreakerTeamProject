@@ -7,16 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
 namespace BrickBreaker
 {
     public partial class MenuScreen : UserControl
     {
-       
+
+        
+
         public MenuScreen()
         {
             InitializeComponent();
             lorenAllignment();
+            Form1.music.PlayLooping();
         }
 
         private void exitButton_Click(object sender, EventArgs e)
