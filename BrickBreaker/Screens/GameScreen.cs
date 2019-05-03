@@ -91,7 +91,7 @@ namespace BrickBreaker
             int ballSize = 20;
             ball = new Ball(ballX, ballY, xSpeed, ySpeed, ballSize);
             ballList.Add(ball);
-
+            
 
             NewLevel();
 
@@ -215,24 +215,25 @@ namespace BrickBreaker
                 ball.Move();
             }
             //Move powerups
-            try
-            {
-                p.Move();
-                p.PowerUpTimer();
-                if (p.PowerUpCollision(paddle))
+
+                foreach (PowerUp p in powers)
                 {
-                    p.UpdatePowerUp();
-                    powers.Remove(powers[0]);
-                    break;
-                }
+                    p.Move();
+                    if (p.PowerUpCollision(paddle))
+                    {
+                        p.UpdatePowerUp();
+                        powers.Remove(powers[0]);
+                        break;
+                    }
                     //delete power up if it goes off the screen
                     if (p.y > paddle.y + 10)
                     {
                         powers.Remove(powers[0]);
+                        break;
                     }
                 }
-            }
-            catch { }
+            
+
             // Check for collision with top and side walls
             ball.WallCollision(this);
 
@@ -272,7 +273,6 @@ namespace BrickBreaker
                 }
             }
 
-
             if (ballList.Count() == 0)
             {
                 lives--;
@@ -283,6 +283,11 @@ namespace BrickBreaker
                 int xSpeed = 6;
                 int ySpeed = 6;
                 int ballSize = 20;
+
+                scoreMult = 1;
+                pSpeedMult = 1;
+                bSpeedMult = 1;
+
 
                 ball = new Ball(ballX, ballY, xSpeed, ySpeed, ballSize);
                 ballList.Add(ball);
