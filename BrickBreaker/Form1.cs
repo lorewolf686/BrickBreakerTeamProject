@@ -13,9 +13,12 @@ namespace BrickBreaker
 {
     public partial class Form1 : Form
     {
-        public Form1()
+		public static List<Score> highScores = new List<Score>();
+
+		public Form1()
         {
             InitializeComponent();
+			loadScores();
         }
         // wow ! ;D
         private void Form1_Load(object sender, EventArgs e)
@@ -25,10 +28,39 @@ namespace BrickBreaker
              this.Controls.Add(ms);
 
              ms.Location = new Point((this.Width - ms.Width) / 2, (this.Height - ms.Height) / 2);
-
-
-            
         }
+
+		public static void loadScores()
+		{
+			#region Strings and ints
+			int score = 0;
+			string name = null;
+			Score s = new Score(score, name);
+			#endregion
+
+			XmlReader reader = XmlReader.Create("Resources/HighScores.xml");
+
+			while (reader.Read())
+			{
+				if (reader.NodeType == XmlNodeType.Text)
+				{
+					s.name = reader.ReadString();
+					reader.ReadToNextSibling("score");
+					s.score = Convert.ToInt16(reader.ReadString());
+
+					for (int i = 0; i < 9; i++)
+					{
+						reader.ReadToNextSibling("name");
+						s.name = reader.ReadString();
+						reader.ReadToNextSibling("score");
+						s.score = Convert.ToInt16(reader.ReadString());
+					}
+				}
+			}
+			reader.Close();
+
+			highScores.Add(s);
+		}
 
         public static void ChangeScreen(UserControl current, string next)
         {

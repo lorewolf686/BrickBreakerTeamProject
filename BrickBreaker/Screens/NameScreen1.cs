@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace BrickBreaker
 {
@@ -15,11 +16,11 @@ namespace BrickBreaker
         public NameScreen1()
         {
             InitializeComponent();
+			
         }
 		int initial = 1;
 		char c = 'A';
 		string name = null;
-
 
 		private void NameScreen1_Load(object sender, EventArgs e)
 		{
@@ -71,6 +72,26 @@ namespace BrickBreaker
 					name = initial1.Text + initial2.Text + initial3.Text;
 				}
 			}
+		}
+
+		private void SaveScores()
+		{
+			XmlWriter writer = XmlWriter.Create("Resources/HighScores.xml");
+
+				writer.WriteStartElement("HighScore");
+
+			Score s = new Score(GameScreen.score, name);
+
+			for(int i = 0; i < Form1.highScores.Count; i++)
+			{
+				writer.WriteString(Convert.ToString(Form1.highScores[i]));
+			}
+		}
+
+		private void buttonMenu_Click(object sender, EventArgs e)
+		{
+			SaveScores();
+			Form1.ChangeScreen(this, "MenuScreen");
 		}
 	}
 }
