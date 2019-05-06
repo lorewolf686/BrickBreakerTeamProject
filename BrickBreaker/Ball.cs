@@ -11,6 +11,8 @@ namespace BrickBreaker
         public Color colour;
 
         SoundPlayer paddleCollide = new SoundPlayer(Properties.Resources.paddleCollision);
+        SoundPlayer otherCollide = new SoundPlayer(Properties.Resources.brickCollision);
+        SoundPlayer dead = new SoundPlayer(Properties.Resources.deathSound);
 
         public static Random rand = new Random();
 
@@ -41,6 +43,7 @@ namespace BrickBreaker
 
             if (ballRec.IntersectsWith(blockTopRec))
             {
+                otherCollide.Play();
                 if (ySpeed > 0)
                 {
                     ySpeed = ySpeed * -1;
@@ -48,6 +51,7 @@ namespace BrickBreaker
             }
             else if (ballRec.IntersectsWith(blockBotRec))
             {
+                otherCollide.Play();
                 if (ySpeed < 0)
                 {
                     ySpeed = ySpeed * -1;
@@ -55,6 +59,7 @@ namespace BrickBreaker
             }
             else if (ballRec.IntersectsWith(blockLeftRec))
             {
+                otherCollide.Play();
                 if (xSpeed > 0)
                 {
                     xSpeed = xSpeed * -1;
@@ -63,6 +68,7 @@ namespace BrickBreaker
             }
             else if (ballRec.IntersectsWith(blockRightRec))
             {
+                otherCollide.Play();
                 if (xSpeed < 0)
                 {
                     xSpeed = xSpeed * -1;
@@ -71,6 +77,7 @@ namespace BrickBreaker
 
             if (blockBotRec.IntersectsWith(ballRec) || blockTopRec.IntersectsWith(ballRec) || blockLeftRec.IntersectsWith(ballRec) || blockRightRec.IntersectsWith(ballRec))
             {
+                otherCollide.Play();
                 return true;
             }
             else
@@ -141,6 +148,7 @@ namespace BrickBreaker
             // Collision with left wall
             if (x <= 0)
             {
+                otherCollide.Play();
                 if (xSpeed <= 0)
                 {
                     xSpeed = xSpeed * -1;
@@ -150,6 +158,7 @@ namespace BrickBreaker
             // Collision with right wall
             if (x >= (UC.Width - size))
             {
+                otherCollide.Play();
                 if (xSpeed >= 0)
                 {
                     xSpeed = xSpeed * -1;
@@ -159,6 +168,7 @@ namespace BrickBreaker
             // Collision with top wall
             if (y <= 41)
             {
+                otherCollide.Play();
                 if (ySpeed <= 0)
                 {
                     ySpeed = ySpeed * -1;
@@ -170,8 +180,8 @@ namespace BrickBreaker
         {
             Boolean didCollide = false;
 
-            if (y >= UC.Height)
-            {
+            if (y >= UC.Height)            {
+                
                 didCollide = true;
             }
 

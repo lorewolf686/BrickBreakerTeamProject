@@ -52,7 +52,8 @@ namespace BrickBreaker
         int powerValue;
 
         //Soundplayers
-        
+        SoundPlayer dead = new SoundPlayer(Properties.Resources.deathSound);
+        SoundPlayer power = new SoundPlayer(Properties.Resources.Powerup);
 
         #endregion
 
@@ -223,6 +224,7 @@ namespace BrickBreaker
                     p.Move();
                     if (p.PowerUpCollision(paddle))
                     {
+                        power.Play();
                         switch (powerValue)
                         {
                             case 1:
@@ -263,6 +265,7 @@ namespace BrickBreaker
                 {
                     if (b.BottomCollision(this))
                     {
+                        dead.Play();
                         ballList.Remove(b);
                     }
                 }
@@ -271,6 +274,7 @@ namespace BrickBreaker
                 {
                     if (b.BottomCollision(this))
                     {
+                        dead.Play();
                         lives--;
 
                         // Moves the ball back to origin
@@ -295,6 +299,7 @@ namespace BrickBreaker
 
             if (ballList.Count() == 0)
             {
+                dead.Play();
                 lives--;
 
                 // Moves the ball back to origin
@@ -310,6 +315,7 @@ namespace BrickBreaker
 
                 if (lives == 0)
                 {
+                    dead.Play();
                     gameTimer.Enabled = false;
                     OnEnd();
                 }
