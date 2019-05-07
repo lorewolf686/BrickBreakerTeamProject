@@ -8,10 +8,10 @@ namespace BrickBreaker
 {
 	public class Score
 	{
-		public int score = 0;
+		public string score = null;
 		public string name = null;
 
-		public Score(int _score, string _name)
+		public Score(string _score, string _name)
 		{
 			score = _score;
 			name = _name;

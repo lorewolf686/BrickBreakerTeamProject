@@ -32,7 +32,6 @@
 			this.initial2 = new System.Windows.Forms.Label();
 			this.initial3 = new System.Windows.Forms.Label();
 			this.scoreText = new System.Windows.Forms.Label();
-			this.buttonMenu = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// initial1
@@ -83,29 +82,11 @@
 			this.scoreText.TabIndex = 3;
 			this.scoreText.Text = "YOUR SCORE WAS";
 			// 
-			// buttonMenu
-			// 
-			this.buttonMenu.BackColor = System.Drawing.Color.Transparent;
-			this.buttonMenu.BackgroundImage = global::BrickBreaker.Properties.Resources.button;
-			this.buttonMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-			this.buttonMenu.FlatAppearance.BorderSize = 0;
-			this.buttonMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonMenu.Font = new System.Drawing.Font("OCR A Std", 14F);
-			this.buttonMenu.ForeColor = System.Drawing.Color.Cyan;
-			this.buttonMenu.Location = new System.Drawing.Point(656, 360);
-			this.buttonMenu.Name = "buttonMenu";
-			this.buttonMenu.Size = new System.Drawing.Size(75, 23);
-			this.buttonMenu.TabIndex = 4;
-			this.buttonMenu.Text = "Menu";
-			this.buttonMenu.UseVisualStyleBackColor = false;
-			this.buttonMenu.Click += new System.EventHandler(this.buttonMenu_Click);
-			// 
 			// NameScreen1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackgroundImage = global::BrickBreaker.Properties.Resources.Stars;
-			this.Controls.Add(this.buttonMenu);
 			this.Controls.Add(this.scoreText);
 			this.Controls.Add(this.initial3);
 			this.Controls.Add(this.initial2);
@@ -125,6 +106,5 @@
 		private System.Windows.Forms.Label initial2;
 		private System.Windows.Forms.Label initial3;
 		private System.Windows.Forms.Label scoreText;
-		private System.Windows.Forms.Button buttonMenu;
 	}
 }

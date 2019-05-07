@@ -52,24 +52,45 @@ namespace BrickBreaker
 							initial++;
 							c = 'A';
 							break;
+
+						case Keys.Escape:
+							SaveScores();
+							Form1.ChangeScreen(this, "MenuScreen");
+							break;
 					}
 
 					switch (initial)
 					{
 						case 1:
+							initial1.BackColor = Color.Cyan;
+							initial1.ForeColor = Color.Transparent;
 							initial1.Text = "" + c;
 							break;
 						case 2:
+							initial1.BackColor = Color.Transparent;
+							initial1.ForeColor = Color.Cyan;
+
+							initial2.BackColor = Color.Cyan;
+							initial2.ForeColor = Color.Transparent;
 							initial2.Text = "" + c;
 							break;
 						case 3:
+							initial2.BackColor = Color.Transparent;
+							initial2.ForeColor = Color.Cyan;
+
+							initial3.BackColor = Color.Cyan;
+							initial3.ForeColor = Color.Transparent;
 							initial3.Text = "" + c;
 							break;
 					}
 				}
 				else
 				{
+					initial3.BackColor = Color.Transparent;
+					initial3.ForeColor = Color.Cyan;
 					name = initial1.Text + initial2.Text + initial3.Text;
+					SaveScores();
+					Form1.ChangeScreen(this, "HighScreen");
 				}
 			}
 		}
@@ -80,18 +101,12 @@ namespace BrickBreaker
 
 				writer.WriteStartElement("HighScore");
 
-			Score s = new Score(GameScreen.score, name);
+			Score s = new Score(Convert.ToString(GameScreen.score), name);
 
 			for(int i = 0; i < Form1.highScores.Count; i++)
 			{
 				writer.WriteString(Convert.ToString(Form1.highScores[i]));
 			}
-		}
-
-		private void buttonMenu_Click(object sender, EventArgs e)
-		{
-			SaveScores();
-			Form1.ChangeScreen(this, "MenuScreen");
 		}
 	}
 }

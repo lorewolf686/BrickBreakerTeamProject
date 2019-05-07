@@ -33,8 +33,7 @@ namespace BrickBreaker
 		public static void loadScores()
 		{
 			#region Strings and ints
-			int score = 0;
-			string name = null;
+			string score = null, name = null;
 			Score s = new Score(score, name);
 			#endregion
 
@@ -44,22 +43,20 @@ namespace BrickBreaker
 			{
 				if (reader.NodeType == XmlNodeType.Text)
 				{
+					//reader.ReadToFollowing("highscore");
+					//reader.ReadToNextSibling("name");
+				    s = new Score(score, name);
 					s.name = reader.ReadString();
 					reader.ReadToNextSibling("score");
-					s.score = Convert.ToInt16(reader.ReadString());
+					s.score = reader.ReadString();
 
-					for (int i = 0; i < 9; i++)
+					if (s.name != null)
 					{
-						reader.ReadToNextSibling("name");
-						s.name = reader.ReadString();
-						reader.ReadToNextSibling("score");
-						s.score = Convert.ToInt16(reader.ReadString());
+						highScores.Add(s);
 					}
 				}
 			}
 			reader.Close();
-
-			highScores.Add(s);
 		}
 
         public static void ChangeScreen(UserControl current, string next)
