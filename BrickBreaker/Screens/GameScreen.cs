@@ -104,7 +104,7 @@ namespace BrickBreaker
 
 
 
-
+            //
             NewLevel();
 
             // start the game engine loop
