@@ -13,6 +13,7 @@ namespace BrickBreaker
 {
     public partial class Form1 : Form
     {
+        public static bool twoPlayer = true; 
         public Form1()
         {
             InitializeComponent();
