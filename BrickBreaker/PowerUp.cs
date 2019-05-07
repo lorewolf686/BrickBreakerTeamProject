@@ -28,16 +28,16 @@ namespace BrickBreaker
             switch (powerValue)
             {
                 case 1:
-                    colour = Color.Blue;
+                    colour = Color.Cyan;
                     break;
                 case 2:
-                    colour = Color.Green;
+                    colour = Color.Lime;
                     break;
                 case 3:
                     colour = Color.Red;
                     break;
                 case 4:
-                    colour = Color.Pink;
+                    colour = Color.DeepPink;
                     break;
                 case 5:
                     colour = Color.White;
