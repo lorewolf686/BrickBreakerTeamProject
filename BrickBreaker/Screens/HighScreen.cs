@@ -8,15 +8,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+using System.Media;
 
 namespace BrickBreaker
 {
     public partial class HighScreen : UserControl
     {
 
+        SoundPlayer music = new SoundPlayer(Properties.Resources.backMusic);
+
 		public HighScreen()
         {
             InitializeComponent();
+            music.PlayLooping();
         }
 
         private void menuButton_Click(object sender, EventArgs e)

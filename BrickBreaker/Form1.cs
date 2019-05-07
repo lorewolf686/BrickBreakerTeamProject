@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+using System.Media;
 
 namespace BrickBreaker
 {
@@ -15,15 +16,20 @@ namespace BrickBreaker
     {
 		public static bool twoPlayer = true;
 		public static List<Score> highScores = new List<Score>();
-
 		public Form1()
         {
             InitializeComponent();
 			loadScores();
         }
+        
+        //Soundplayer for backMusic
+        public static SoundPlayer music = new SoundPlayer(Properties.Resources.backMusic);
+
         // wow ! ;D
         private void Form1_Load(object sender, EventArgs e)
         {
+            
+             
              //Start the program centred on the Menu Screen
              MenuScreen ms = new MenuScreen();
              this.Controls.Add(ms);
