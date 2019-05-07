@@ -249,7 +249,7 @@ namespace BrickBreaker
                 foreach (PowerUp p in powers)
                 {
                     p.Move();
-                    if (p.PowerUpCollision(paddle))
+                    if (p.PowerUpCollision(paddle)||p.PowerUpCollision(paddle2))
                     {
 
                         p.UpdatePowerUp();
@@ -258,7 +258,7 @@ namespace BrickBreaker
                         break;
                     }
                     //delete power up if it goes off the screen
-                    if (p.y > paddle.y + 10)
+                    if (p.y > paddle.y + 30)
                     {
                         powers.Remove(powers[0]);
                         break;
