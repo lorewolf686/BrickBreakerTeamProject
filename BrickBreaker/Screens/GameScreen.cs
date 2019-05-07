@@ -53,6 +53,10 @@ namespace BrickBreaker
         Random randGen = new Random();
         int powerValue;
 
+        //Soundplayers
+        SoundPlayer dead = new SoundPlayer(Properties.Resources.deathSound);
+        SoundPlayer power = new SoundPlayer(Properties.Resources.Powerup);
+
         #endregion
 
         public GameScreen()
@@ -64,6 +68,8 @@ namespace BrickBreaker
 
         public void OnStart()
         {
+            
+
             //reset score
             lives = 5;
             score = 0;
@@ -91,7 +97,11 @@ namespace BrickBreaker
             int ballSize = 20;
             ball = new Ball(ballX, ballY, xSpeed, ySpeed, ballSize);
             ballList.Add(ball);
-            
+
+
+            //Soundplayer
+            SoundPlayer music = new SoundPlayer(Properties.Resources.backMusic);
+
 
             NewLevel();
 
@@ -149,8 +159,6 @@ namespace BrickBreaker
                     {
                         gamePaused = true;
                     }
-
-                    //TODO: change screen
                     break;
                 case Keys.Space:
                     spaceKeyDown = true;
@@ -243,7 +251,9 @@ namespace BrickBreaker
                     p.Move();
                     if (p.PowerUpCollision(paddle)||p.PowerUpCollision(paddle2))
                     {
+
                         p.UpdatePowerUp();
+
                         powers.Remove(powers[0]);
                         break;
                     }
@@ -266,6 +276,7 @@ namespace BrickBreaker
                 {
                     if (b.BottomCollision(this))
                     {
+                        dead.Play();
                         ballList.Remove(b);
                     }
                 }
@@ -274,6 +285,7 @@ namespace BrickBreaker
                 {
                     if (b.BottomCollision(this))
                     {
+                        dead.Play();
                         lives--;
 
                         // Moves the ball back to origin
@@ -297,6 +309,7 @@ namespace BrickBreaker
 
             if (ballList.Count() == 0)
             {
+                dead.Play();
                 lives--;
 
                 // Moves the ball back to origin
@@ -317,6 +330,7 @@ namespace BrickBreaker
 
                 if (lives == 0)
                 {
+                    dead.Play();
                     gameTimer.Enabled = false;
                     OnEnd();
                 }
