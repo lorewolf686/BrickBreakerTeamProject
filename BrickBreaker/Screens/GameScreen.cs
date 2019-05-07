@@ -28,16 +28,18 @@ namespace BrickBreaker
 
         int currentLevel = 1;
         string level, levelName;
-        public static int lives, score, scoreMult;
+        public static int lives, score;
         public static int powerupSpeed = 2;
         public static double lastPower = 0;
         public static int bSpeedMult = 1;
         public static int pSpeedMult = 1;
+        public static int scoreMult = 1;
+
         Font scoreFont = new Font("OCR A std", 14, FontStyle.Regular);
         SolidBrush scoreBrush = new SolidBrush(Color.Cyan);
 
         // Paddle and Ball objects
-        Paddle paddle;
+        Paddle paddle, paddle2;
         Ball ball;
 
         // list of all blocks for current level
@@ -96,13 +98,25 @@ namespace BrickBreaker
             ball = new Ball(ballX, ballY, xSpeed, ySpeed, ballSize);
             ballList.Add(ball);
 
+
             //Soundplayer
             SoundPlayer music = new SoundPlayer(Properties.Resources.backMusic);
+
 
             NewLevel();
 
             // start the game engine loop
             gameTimer.Enabled = true;
+            if (Form1.twoPlayer)
+            {
+                
+                int paddleWidth2 = 110;
+                int paddleHeight2 = 20;
+                int paddleX2 = ((this.Width / 2) - (paddleWidth / 2));
+                int paddleY2 = (this.Height - paddleHeight) - 20;
+                
+                paddle2 = new Paddle(paddleX2, paddleY2, paddleWidth2, paddleHeight2, paddleSpeed, Color.White);
+            }
         }
 
         public void NewLevel()
@@ -145,8 +159,6 @@ namespace BrickBreaker
                     {
                         gamePaused = true;
                     }
-
-                    //TODO: change screen
                     break;
                 case Keys.Space:
                     spaceKeyDown = true;
@@ -198,6 +210,18 @@ namespace BrickBreaker
             {
                 paddle.Move("right");
             }
+            //player 2 movege and stopge
+            if (Form1.twoPlayer)
+            {
+                if (aKeyDown && paddle2.x > 0)
+                {
+                    paddle2.Move("left");
+                }
+                if (dKeyDown && paddle2.x < (this.Width - paddle2.width))
+                {
+                    paddle2.Move("right");
+                }
+            }
 
             if (escDown == true)
             {
@@ -221,43 +245,26 @@ namespace BrickBreaker
                 ball.Move();
             }
             //Move powerups
-            try
-            {
+
                 foreach (PowerUp p in powers)
                 {
                     p.Move();
                     if (p.PowerUpCollision(paddle))
                     {
-                        power.Play();
-                        switch (powerValue)
-                        {
-                            case 1:
-                                GameScreen.bSpeedMult = GameScreen.bSpeedMult + 1;
 
-                                break;
-                            case 2:
-                                GameScreen.pSpeedMult = GameScreen.pSpeedMult + 1;
-                                break;
-                            case 3:
-                                GameScreen.scoreMult = GameScreen.scoreMult + 1;
-                                break;
-                            case 4:
-                                GameScreen.score = GameScreen.score + 2000;
-                                break;
-                        }
+                        p.UpdatePowerUp();
+
                         powers.Remove(powers[0]);
                         break;
                     }
-
                     //delete power up if it goes off the screen
                     if (p.y > paddle.y + 10)
                     {
                         powers.Remove(powers[0]);
+                        break;
                     }
                 }
-            }
-            catch { }
-
+            
 
             // Check for collision with top and side walls
             ball.WallCollision(this);
@@ -300,7 +307,6 @@ namespace BrickBreaker
                 }
             }
 
-
             if (ballList.Count() == 0)
             {
                 dead.Play();
@@ -312,6 +318,11 @@ namespace BrickBreaker
                 int xSpeed = 6;
                 int ySpeed = 6;
                 int ballSize = 20;
+
+                scoreMult = 1;
+                pSpeedMult = 1;
+                bSpeedMult = 1;
+
 
                 ball = new Ball(ballX, ballY, xSpeed, ySpeed, ballSize);
                 ballList.Add(ball);
@@ -327,7 +338,10 @@ namespace BrickBreaker
 
             // Check for collision of ball with paddle, (incl. paddle movement)
             ball.PaddleCollision(paddle, leftArrowDown, rightArrowDown);
-
+            if (Form1.twoPlayer)
+            {
+                ball.PaddleCollision(paddle2, aKeyDown, dKeyDown);
+            }
             // Check if ball has collided with any blocks
             foreach (Block b in blocks)
             {
@@ -427,29 +441,33 @@ namespace BrickBreaker
         }
 
         public void NumberGen()
-        {
-            powerValue = randGen.Next(1, 5);
+
+        {          
+            powerValue = randGen.Next(1, 6);
         }
 
         public void GameScreen_Paint(object sender, PaintEventArgs e)
         {
             //Draw Paddle
+            
             e.Graphics.DrawImage(Properties.Resources.Player1, paddle.x, paddle.y);
-
+            if (Form1.twoPlayer)
+            {
+                e.Graphics.DrawImage(Properties.Resources.Player2, paddle2.x, paddle2.y);
+            }
             //Draw Ball
             e.Graphics.DrawImage(Properties.Resources.ball, ball.x, ball.y);
 
             // Draws blocks
             foreach (Block b in blocks)
             {
-
                 e.Graphics.DrawImage(b.UpdateColour(), b.x, b.y);
             }
 
             // Draws powerups
             foreach (PowerUp p in powers)
             {
-                SolidBrush powerBrush = new SolidBrush(p.UpdateColour());
+                SolidBrush powerBrush = new SolidBrush(p.colour);
                 e.Graphics.FillRectangle(powerBrush, p.x, p.y, p.size, p.size);
             }
 
