@@ -16,7 +16,7 @@ namespace BrickBreaker
     {
         public Form1()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
         
         //Soundplayer for backMusic
@@ -25,6 +25,8 @@ namespace BrickBreaker
         // wow ! ;D
         private void Form1_Load(object sender, EventArgs e)
         {
+            
+             
              //Start the program centred on the Menu Screen
              MenuScreen ms = new MenuScreen();
              this.Controls.Add(ms);

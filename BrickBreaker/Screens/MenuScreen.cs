@@ -14,13 +14,14 @@ namespace BrickBreaker
     public partial class MenuScreen : UserControl
     {
 
-        
+        SoundPlayer music = new SoundPlayer(Properties.Resources.backMusic);
 
         public MenuScreen()
         {
             InitializeComponent();
             lorenAllignment();
-            Form1.music.PlayLooping();
+            music.PlayLooping();
+           
         }
 
         private void exitButton_Click(object sender, EventArgs e)
@@ -30,6 +31,7 @@ namespace BrickBreaker
 
         private void playButton_Click(object sender, EventArgs e)
         {
+            music.Stop();
             // Goes to the game screen  
             Form1.ChangeScreen(this,"GameScreen");
         }

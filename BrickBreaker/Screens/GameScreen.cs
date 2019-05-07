@@ -66,6 +66,8 @@ namespace BrickBreaker
 
         public void OnStart()
         {
+            
+
             //reset score
             lives = 5;
             score = 0;
@@ -94,6 +96,8 @@ namespace BrickBreaker
             ball = new Ball(ballX, ballY, xSpeed, ySpeed, ballSize);
             ballList.Add(ball);
 
+            //Soundplayer
+            SoundPlayer music = new SoundPlayer(Properties.Resources.backMusic);
 
             NewLevel();
 
