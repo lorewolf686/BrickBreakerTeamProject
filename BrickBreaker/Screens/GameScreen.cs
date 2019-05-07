@@ -54,8 +54,9 @@ namespace BrickBreaker
         int powerValue;
 
         //Soundplayers
-        SoundPlayer dead = new SoundPlayer(Properties.Resources.deathSound);
+        SoundPlayer dead = new SoundPlayer(Properties.Resources.lifeLost);
         SoundPlayer power = new SoundPlayer(Properties.Resources.Powerup);
+        SoundPlayer bCollide = new SoundPlayer(Properties.Resources.brickCollision);
 
         #endregion
 
@@ -95,11 +96,13 @@ namespace BrickBreaker
             int xSpeed = 6;
             int ySpeed = 6;
             int ballSize = 20;
+
             ballList.Add(new Ball(ballX, ballY, xSpeed, ySpeed, ballSize));
  
 
             //Soundplayer
             SoundPlayer music = new SoundPlayer(Properties.Resources.backMusic);
+
 
 
 
@@ -300,6 +303,7 @@ namespace BrickBreaker
 
                         if (lives == 0)
                         {
+                            dead.Play();
                             gameTimer.Enabled = false;
                             OnEnd();
                         }
@@ -347,6 +351,7 @@ namespace BrickBreaker
             {
                 if (ball.BlockCollision(b))
                 {
+                    bCollide.Play();
                     --b.hp;
                     //blocks.Remove(b);
                     int blockX = b.x;
