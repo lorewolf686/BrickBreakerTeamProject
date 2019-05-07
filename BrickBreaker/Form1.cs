@@ -15,6 +15,7 @@ namespace BrickBreaker
     {
 		public static List<Score> highScores = new List<Score>();
 
+		public static bool twoPlayer = true;
 		public Form1()
         {
             InitializeComponent();
