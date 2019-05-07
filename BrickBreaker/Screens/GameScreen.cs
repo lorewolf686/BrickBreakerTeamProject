@@ -96,10 +96,14 @@ namespace BrickBreaker
             int xSpeed = 6;
             int ySpeed = 6;
             int ballSize = 20;
-            ball = new Ball(ballX, ballY, xSpeed, ySpeed, ballSize);
-            ballList.Add(ball);
 
-            
+            ballList.Add(new Ball(ballX, ballY, xSpeed, ySpeed, ballSize));
+ 
+
+            //Soundplayer
+            SoundPlayer music = new SoundPlayer(Properties.Resources.backMusic);
+
+
 
 
             NewLevel();
@@ -457,8 +461,10 @@ namespace BrickBreaker
                 e.Graphics.DrawImage(Properties.Resources.Player2, paddle2.x, paddle2.y);
             }
             //Draw Ball
-            e.Graphics.DrawImage(Properties.Resources.ball, ball.x, ball.y);
-
+            foreach (Ball b in ballList)
+            {
+                e.Graphics.DrawImage(Properties.Resources.ball, b.x, b.y);
+            }
             // Draws blocks
             foreach (Block b in blocks)
             {
