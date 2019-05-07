@@ -40,14 +40,5 @@ namespace BrickBreaker
 				highScores.Text += i + ". " + Form1.highScores[i].name + " - " + Form1.highScores[i].score + "\n" + "\n";
 			}	
 		}
-
-		
-
-        private void allign()
-        {
-
-            menuButton.Location = new Point((this.Width - menuButton.Width) / 2, (this.Height - menuButton.Height) / 2);
-
-        }
     }
 }
