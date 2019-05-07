@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+using System.Media;
 
 namespace BrickBreaker
 {
@@ -16,10 +17,12 @@ namespace BrickBreaker
 		string name1, name2, name3, name4, name5, name6, name7, name8, name9, name10;
 		int score1, score2, score3, score4, score5, score6, score7, score8, score9, score10;
 
+        SoundPlayer music = new SoundPlayer(Properties.Resources.backMusic);
+
 		public HighScreen()
         {
             InitializeComponent();
-
+            music.PlayLooping();
         }
 
 
