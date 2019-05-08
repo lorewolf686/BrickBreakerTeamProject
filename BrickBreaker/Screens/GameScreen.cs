@@ -26,7 +26,7 @@ namespace BrickBreaker
 
         // Game values
 
-        int currentLevel = 6;
+        int currentLevel = 1;
         string level, levelName;
         public static int lives, score;
         public static int powerupSpeed = 2;
