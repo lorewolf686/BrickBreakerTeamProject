@@ -414,7 +414,7 @@ namespace BrickBreaker
             }
             catch
             {
-                Form1.ChangeScreen(this, "MenuScreen");
+                Form1.ChangeScreen(this, "HighScreen");
                 brickReader = XmlReader.Create("Resources/Level1.xml");
             }
 
