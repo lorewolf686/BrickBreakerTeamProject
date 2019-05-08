@@ -251,7 +251,7 @@ namespace BrickBreaker
                 foreach (PowerUp p in powers)
                 {
                     p.Move();
-                    if (p.PowerUpCollision(paddle)||p.PowerUpCollision(paddle2))
+                    if (p.PowerUpCollision(paddle))
                     {
 
                         p.UpdatePowerUp();
@@ -259,6 +259,14 @@ namespace BrickBreaker
                         powers.Remove(powers[0]);
                         break;
                     }
+
+                    if (Form1.twoPlayer && p.PowerUpCollision(paddle2))
+                    {
+                    p.UpdatePowerUp();
+
+                    powers.Remove(powers[0]);
+                    break;
+                }
                     //delete power up if it goes off the screen
                     if (p.y > paddle.y + 30)
                     {
