@@ -11,10 +11,10 @@ namespace BrickBreaker
 		public string score = null;
 		public string name = null;
 
-		public Score(string _score, string _name)
+		public Score(string _name, string _score)
 		{
-			score = _score;
 			name = _name;
+			score = _score;
 		}
 	}
 }

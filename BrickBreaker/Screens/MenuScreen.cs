@@ -66,5 +66,5 @@ namespace BrickBreaker
         {
             Form1.ChangeScreen(this, "HighScreen");
         }
-    }
+	}
 }

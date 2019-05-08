@@ -23,7 +23,7 @@ namespace BrickBreaker
         }
         
         //Soundplayer for backMusic
-        public static SoundPlayer music = new SoundPlayer(Properties.Resources.backMusic);
+//        public static SoundPlayer music = new SoundPlayer(Properties.Resources.backMusic);
 
         // wow ! ;D
         private void Form1_Load(object sender, EventArgs e)
