@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace BrickBreaker
 {
@@ -24,7 +25,6 @@ namespace BrickBreaker
 		char c = 'A';
 		string name = null;
 
-
 		private void NameScreen1_Load(object sender, EventArgs e)
 		{
 			scoreText.Text = "YOUR SCORE WAS " + GameScreen.score;
@@ -33,6 +33,8 @@ namespace BrickBreaker
 		private void NameScreen1_KeyDown(object sender, KeyEventArgs e)
 		{
 			{
+				Score s = new Score(name, GameScreen.score);
+
 				if (initial < 4)
 				{
 					switch (e.KeyCode)
@@ -55,26 +57,69 @@ namespace BrickBreaker
 							initial++;
 							c = 'A';
 							break;
+
+						case Keys.Escape:
+							SaveScores();
+							Form1.ChangeScreen(this, "MenuScreen");
+							break;
 					}
 
 					switch (initial)
 					{
 						case 1:
+							initial1.BackColor = Color.Cyan;
+							initial1.ForeColor = Color.Transparent;
 							initial1.Text = "" + c;
 							break;
 						case 2:
+							initial1.BackColor = Color.Transparent;
+							initial1.ForeColor = Color.Cyan;
+
+							initial2.BackColor = Color.Cyan;
+							initial2.ForeColor = Color.Transparent;
 							initial2.Text = "" + c;
 							break;
 						case 3:
+							initial2.BackColor = Color.Transparent;
+							initial2.ForeColor = Color.Cyan;
+
+							initial3.BackColor = Color.Cyan;
+							initial3.ForeColor = Color.Transparent;
 							initial3.Text = "" + c;
 							break;
 					}
 				}
 				else
 				{
+					initial3.BackColor = Color.Transparent;
+					initial3.ForeColor = Color.Cyan;
 					name = initial1.Text + initial2.Text + initial3.Text;
+					s.name = name;
+					s.score = GameScreen.score;
+					Form1.highScores.Add(s);
+					Form1.highScores = Form1.highScores.OrderBy(x => (x.score * -1)).ToList();
+					SaveScores();
+					Form1.ChangeScreen(this, "HighScreen");
 				}
 			}
+		}
+
+		private void SaveScores()
+		{
+			XmlWriter writer = XmlWriter.Create("Resources/HighScores.xml");
+
+			writer.WriteStartElement("highscore");
+
+			foreach (Score s in Form1.highScores)
+			{
+
+				writer.WriteElementString("name", s.name);
+				writer.WriteElementString("score", Convert.ToString(s.score));
+
+			}
+			writer.WriteEndElement();
+
+			writer.Close();
 		}
 	}
 }

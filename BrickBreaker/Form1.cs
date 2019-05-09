@@ -14,14 +14,16 @@ namespace BrickBreaker
 {
     public partial class Form1 : Form
     {
-        public static bool twoPlayer = true; 
-        public Form1()
+		public static bool twoPlayer = false;
+		public static List<Score> highScores = new List<Score>();
+		public Form1()
         {
-            InitializeComponent();            
+            InitializeComponent();
+			loadScores();
         }
         
         //Soundplayer for backMusic
-        public static SoundPlayer music = new SoundPlayer(Properties.Resources.backMusic);
+//        public static SoundPlayer music = new SoundPlayer(Properties.Resources.backMusic);
 
         // wow ! ;D
         private void Form1_Load(object sender, EventArgs e)
@@ -33,10 +35,37 @@ namespace BrickBreaker
              this.Controls.Add(ms);
 
              ms.Location = new Point((this.Width - ms.Width) / 2, (this.Height - ms.Height) / 2);
-
-
-            
         }
+
+		public static void loadScores()
+		{
+			#region Strings and ints
+			int score = 0;
+			string name = null;
+			Score s = new Score(name, score);
+			#endregion
+
+			XmlReader reader = XmlReader.Create("Resources/HighScores.xml");
+
+			while (reader.Read())
+			{
+				if (reader.NodeType == XmlNodeType.Text)
+				{
+					//reader.ReadToFollowing("highscore");
+					//reader.ReadToNextSibling("name");
+				    s = new Score(name, score);
+					s.name = reader.ReadString();
+					reader.ReadToNextSibling("score");
+					s.score = Convert.ToInt16(reader.ReadString());
+
+					if (s.name != null)
+					{
+						highScores.Add(s);
+					}
+				}
+			}
+			reader.Close();
+		}
 
         public static void ChangeScreen(UserControl current, string next)
         {

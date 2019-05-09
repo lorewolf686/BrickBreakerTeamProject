@@ -7,6 +7,7 @@ namespace BrickBreaker
 {
     public class Ball
     {
+        Boolean angle1, angle2;
         public int x, y, xSpeed, ySpeed, size;
         public Color colour;
 
@@ -41,38 +42,25 @@ namespace BrickBreaker
 
             Rectangle ballRec = new Rectangle(x, y, size, size);
 
-            if (ballRec.IntersectsWith(blockTopRec))
+            if (ballRec.IntersectsWith(blockTopRec) && ySpeed > 0)
             {
+                ySpeed = ySpeed * -1;
                 otherCollide.Play();
-                if (ySpeed > 0)
-                {
-                    ySpeed = ySpeed * -1;
-                }
             }
-            else if (ballRec.IntersectsWith(blockBotRec))
+            else if (ballRec.IntersectsWith(blockBotRec) && ySpeed < 0)
             {
+                ySpeed = ySpeed * -1;
                 otherCollide.Play();
-                if (ySpeed < 0)
-                {
-                    ySpeed = ySpeed * -1;
-                }
             }
-            else if (ballRec.IntersectsWith(blockLeftRec))
+            else if (ballRec.IntersectsWith(blockLeftRec) && xSpeed > 0)
             {
+                xSpeed = xSpeed * -1;
                 otherCollide.Play();
-                if (xSpeed > 0)
-                {
-                    xSpeed = xSpeed * -1;
-                }
-
             }
-            else if (ballRec.IntersectsWith(blockRightRec))
+            else if (ballRec.IntersectsWith(blockRightRec) && xSpeed < 0)
             {
+                xSpeed = xSpeed * -1;
                 otherCollide.Play();
-                if (xSpeed < 0)
-                {
-                    xSpeed = xSpeed * -1;
-                }
             }
 
             if (blockBotRec.IntersectsWith(ballRec) || blockTopRec.IntersectsWith(ballRec) || blockLeftRec.IntersectsWith(ballRec) || blockRightRec.IntersectsWith(ballRec))
@@ -88,8 +76,17 @@ namespace BrickBreaker
 
         public void PaddleCollision(Paddle p, bool pMovingLeft, bool pMovingRight)
         {
+            int midX = x + (size / 2);
+
             Rectangle ballRec = new Rectangle(x, y, size, size);
             Rectangle paddleRec = new Rectangle(p.x, p.y, p.width, p.height);
+
+            Rectangle paddleRec1 = new Rectangle(p.x, p.y, p.width, p.height);
+            Rectangle paddleRec2 = new Rectangle(p.x, p.y, p.width, p.height);
+            Rectangle paddleRec3 = new Rectangle(p.x, p.y, p.width, p.height);
+            Rectangle paddleRec4 = new Rectangle(p.x, p.y, p.width, p.height);
+            Rectangle paddleRec5 = new Rectangle(p.x, p.y, p.width, p.height);
+            Rectangle paddleRec6 = new Rectangle(p.x, p.y, p.width, p.height);
 
             if (ballRec.IntersectsWith(paddleRec))
             {
