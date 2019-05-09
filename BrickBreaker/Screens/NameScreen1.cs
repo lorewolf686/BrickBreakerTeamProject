@@ -53,7 +53,7 @@ namespace BrickBreaker
 							}
 							break;
 
-						case Keys.Enter:
+						case Keys.Space:
 							initial++;
 							c = 'A';
 							break;
@@ -98,6 +98,13 @@ namespace BrickBreaker
 					s.score = GameScreen.score;
 					Form1.highScores.Add(s);
 					Form1.highScores = Form1.highScores.OrderBy(x => (x.score * -1)).ToList();
+                   if( Form1.highScores.Count > 10)
+                    {
+                        for (int x = Form1.highScores.Count - 1; x > 10 ;x--)
+                        {
+                            Form1.highScores.RemoveAt(x);
+                        }
+                    }
 					SaveScores();
 					Form1.ChangeScreen(this, "HighScreen");
 				}
