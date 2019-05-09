@@ -403,7 +403,7 @@ namespace BrickBreaker
             //redraw the screen
             Refresh();
         }
-
+        
 
         private void LevelLoad(string levelNo)
         {
