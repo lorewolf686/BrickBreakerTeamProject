@@ -1,5 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-
 <level number ="3" name ="This is Jimmy">
   <brick x ="0" y ="200" hp ="4"/>
   <brick x ="93" y ="200" hp ="4"/>
