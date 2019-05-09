@@ -27,8 +27,8 @@ namespace BrickBreaker
 
             if (Form1.twoPlayer)
             {
-                xSpeed++;
-                ySpeed++;
+                xSpeed = xSpeed + 2;
+                ySpeed = ySpeed + 2;
             }
         }
 
