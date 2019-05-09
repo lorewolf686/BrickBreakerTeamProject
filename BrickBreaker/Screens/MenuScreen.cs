@@ -7,17 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
 namespace BrickBreaker
 {
     public partial class MenuScreen : UserControl
     {
-        Boolean upPress, downPress = false;
+
+        SoundPlayer music = new SoundPlayer(Properties.Resources.backMusic);
 
         public MenuScreen()
         {
             InitializeComponent();
-
+            lorenAlignment();
+            music.PlayLooping();
+           
         }
 
         private void exitButton_Click(object sender, EventArgs e)
@@ -27,17 +31,52 @@ namespace BrickBreaker
 
         private void playButton_Click(object sender, EventArgs e)
         {
+            music.Stop();
             // Goes to the game screen  
             Form1.ChangeScreen(this,"GameScreen");
-
-
         }
 
-        private void lorenAllignment()
+        private void lorenAlignment()
         {
-            playButton.Location = new Point((this.Width - playButton.Width) / 2, 250);
-            exitButton.Location = new Point((this.Width - exitButton.Width) / 2, 370);
-            title.Location = new Point((this.Width - title.Width) / 2, 90);
-        }       
+            playButton.Location = new Point((this.Width - playButton.Width) / 2, 240);            
+            exitButton.Location = new Point((this.Width - exitButton.Width) / 2, 400);
+            title.Location = new Point((this.Width - title.Width) / 2, 130);
+        }
+
+		private void showDebug_CheckedChanged(object sender, EventArgs e)
+		{
+			if (showDebug.Checked == true)
+			{
+				highButton.Visible = true;
+				nameButton.Visible = true;
+			}
+			else
+			{
+				highButton.Visible = false;
+				nameButton.Visible = false;
+			}
+		}
+
+		private void nameButton_Click(object sender, EventArgs e)
+		{
+			Form1.ChangeScreen(this, "NameScreen");
+		}
+
+        private void highButton_Click(object sender, EventArgs e)
+        {
+            Form1.ChangeScreen(this, "HighScreen");
+        }
+
+        private void coopBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (coopBox.Checked == true)
+            {
+                Form1.twoPlayer = true;
+            }
+            else
+            {
+                Form1.twoPlayer = false;
+            }
+        }
     }
 }

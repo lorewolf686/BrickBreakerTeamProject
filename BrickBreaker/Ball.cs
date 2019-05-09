@@ -1,13 +1,19 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Media;
 
 namespace BrickBreaker
 {
     public class Ball
     {
+        Boolean angle1, angle2;
         public int x, y, xSpeed, ySpeed, size;
         public Color colour;
+
+        SoundPlayer paddleCollide = new SoundPlayer(Properties.Resources.paddleCollision);
+        SoundPlayer otherCollide = new SoundPlayer(Properties.Resources.brickCollision);
+        SoundPlayer dead = new SoundPlayer(Properties.Resources.deathSound);
 
         public static Random rand = new Random();
 
@@ -29,55 +35,79 @@ namespace BrickBreaker
 
         public bool BlockCollision(Block b)
         {
-            Rectangle blockRec = new Rectangle(b.x, b.y, b.width, b.height);
+            Rectangle blockBotRec = new Rectangle(b.x, (b.y + (b.height / 2)), b.width, b.height);
+            Rectangle blockTopRec = new Rectangle(b.x, b.y, b.width, b.height / 2);
+            Rectangle blockLeftRec = new Rectangle(b.x, b.y + (b.height / 4), b.width / 2, b.height / 2);
+            Rectangle blockRightRec = new Rectangle(b.x + (b.width / 2), b.y + (b.height / 4), b.width / 2, b.height / 2);
+
             Rectangle ballRec = new Rectangle(x, y, size, size);
 
-            if (ballRec.IntersectsWith(blockRec))
+            if (ballRec.IntersectsWith(blockTopRec) && ySpeed > 0)
             {
-                if (ySpeed == -2)
-                {
-                    ySpeed = 2;
-                }
-                else if (ySpeed == -3)
-                {
-                    ySpeed = 3;
-                }
-                else if (ySpeed == -4)
-                {
-                    ySpeed = 4;
-                }
-                else
-                {
-                    ySpeed = 6;
-                }
+                ySpeed = ySpeed * -1;
+                otherCollide.Play();
+            }
+            else if (ballRec.IntersectsWith(blockBotRec) && ySpeed < 0)
+            {
+                ySpeed = ySpeed * -1;
+                otherCollide.Play();
+            }
+            else if (ballRec.IntersectsWith(blockLeftRec) && xSpeed > 0)
+            {
+                xSpeed = xSpeed * -1;
+                otherCollide.Play();
+            }
+            else if (ballRec.IntersectsWith(blockRightRec) && xSpeed < 0)
+            {
+                xSpeed = xSpeed * -1;
+                otherCollide.Play();
             }
 
-            return blockRec.IntersectsWith(ballRec);
+            if (blockBotRec.IntersectsWith(ballRec) || blockTopRec.IntersectsWith(ballRec) || blockLeftRec.IntersectsWith(ballRec) || blockRightRec.IntersectsWith(ballRec))
+            {
+                otherCollide.Play();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public void PaddleCollision(Paddle p, bool pMovingLeft, bool pMovingRight)
         {
+            int midX = x + (size / 2);
+
             Rectangle ballRec = new Rectangle(x, y, size, size);
             Rectangle paddleRec = new Rectangle(p.x, p.y, p.width, p.height);
 
+            Rectangle paddleRec1 = new Rectangle(p.x, p.y, p.width, p.height);
+            Rectangle paddleRec2 = new Rectangle(p.x, p.y, p.width, p.height);
+            Rectangle paddleRec3 = new Rectangle(p.x, p.y, p.width, p.height);
+            Rectangle paddleRec4 = new Rectangle(p.x, p.y, p.width, p.height);
+            Rectangle paddleRec5 = new Rectangle(p.x, p.y, p.width, p.height);
+            Rectangle paddleRec6 = new Rectangle(p.x, p.y, p.width, p.height);
+
             if (ballRec.IntersectsWith(paddleRec))
             {
-                if (x < p.x + p.width / 2) // divide the paddle into 8 sections with different angles of ball launch
+                paddleCollide.Play();
+
+                if (x < p.x + p.width * 4 / 8) // divide the paddle into 8 sections with different angles of ball launch
                 {
-                    ySpeed = -6;
-                    xSpeed = -6;
+                    ySpeed = -5;
+                    xSpeed = -5;
                 }
                 else if (x < p.x + p.width * 5 / 8)
                 {
-                    ySpeed = -6;
-                    xSpeed = 6;
+                    ySpeed = -5;
+                    xSpeed = 5;
                 }
                 else if (x <= p.x + p.width / 8)
                 {
                     ySpeed = -2;
                     xSpeed = -8;
                 }
-                else if (x < p.x + p.width / 4)
+                else if (x < p.x + p.width * 2 / 8)
                 {
                     ySpeed = -3;
                     xSpeed = -7;
@@ -87,7 +117,7 @@ namespace BrickBreaker
                     ySpeed = -4;
                     xSpeed = -6;
                 }
-                else if (x < p.x + p.width * 3 / 4)
+                else if (x < p.x + p.width * 6 / 8)
                 {
                     ySpeed = -4;
                     xSpeed = 6;
@@ -97,7 +127,7 @@ namespace BrickBreaker
                     ySpeed = -3;
                     xSpeed = 7;
                 }
-                else
+                else if ((x + size) <= p.x + p.width)
                 {
                     ySpeed = -2;
                     xSpeed = 8;
@@ -115,54 +145,30 @@ namespace BrickBreaker
             // Collision with left wall
             if (x <= 0)
             {
-                if (xSpeed == -6) //if xspeed is *6* while colliding, move to the right that amount
+                otherCollide.Play();
+                if (xSpeed <= 0)
                 {
-                    xSpeed = 6;
-                }
-                else if (xSpeed == -7) //if xspeed is *7* while colliding, move to the right that amount
-                {
-                    xSpeed = 7;
-                }
-                else //if xspeed is *8* while colliding, move to the right that amount
-                {
-                    xSpeed = 8;
+                    xSpeed = xSpeed * -1;
                 }
             }
 
             // Collision with right wall
             if (x >= (UC.Width - size))
             {
-                if (xSpeed == 6) //if xspeed is *6* while colliding, move to the left that amount
+                otherCollide.Play();
+                if (xSpeed >= 0)
                 {
-                    xSpeed = -6;
-                }
-                else if (xSpeed == 7)
-                {
-                    xSpeed = -7;
-                }
-                else
-                {
-                    xSpeed = -8;
+                    xSpeed = xSpeed * -1;
                 }
             }
+
             // Collision with top wall
-            if (y <= 2)
+            if (y <= 41)
             {
-                if (ySpeed == -2) //if yspeed is *6* while colliding, move to the left that amount
+                otherCollide.Play();
+                if (ySpeed <= 0)
                 {
-                    ySpeed = 2;
-                }
-                else if (xSpeed == -3)
-                {
-                    ySpeed = 3;
-                }
-                else if (xSpeed == -4)
-                {
-                    ySpeed = 4;
-                }
-                else
-                {
-                    ySpeed = 6;
+                    ySpeed = ySpeed * -1;
                 }
             }
         }
@@ -171,8 +177,8 @@ namespace BrickBreaker
         {
             Boolean didCollide = false;
 
-            if (y >= UC.Height)
-            {
+            if (y >= UC.Height)            {
+                
                 didCollide = true;
             }
 
