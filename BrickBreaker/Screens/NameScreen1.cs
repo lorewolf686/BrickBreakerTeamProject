@@ -33,7 +33,7 @@ namespace BrickBreaker
 		private void NameScreen1_KeyDown(object sender, KeyEventArgs e)
 		{
 			{
-				Score s = new Score(name, Convert.ToString(GameScreen.score));
+				Score s = new Score(name, GameScreen.score);
 
 				if (initial < 4)
 				{
@@ -95,8 +95,9 @@ namespace BrickBreaker
 					initial3.ForeColor = Color.Cyan;
 					name = initial1.Text + initial2.Text + initial3.Text;
 					s.name = name;
-					s.score = Convert.ToString(GameScreen.score);
+					s.score = GameScreen.score;
 					Form1.highScores.Add(s);
+					Form1.highScores = Form1.highScores.OrderBy(x => (x.score * -1)).ToList();
 					SaveScores();
 					Form1.ChangeScreen(this, "HighScreen");
 				}
@@ -113,7 +114,7 @@ namespace BrickBreaker
 			{
 
 				writer.WriteElementString("name", s.name);
-				writer.WriteElementString("score", s.score);
+				writer.WriteElementString("score", Convert.ToString(s.score));
 
 			}
 			writer.WriteEndElement();
