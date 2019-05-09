@@ -28,7 +28,6 @@ namespace BrickBreaker
         /// </summary>
         private void InitializeComponent()
         {
-
             this.highScores = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.menuButton = new System.Windows.Forms.Button();
@@ -75,6 +74,8 @@ namespace BrickBreaker
             this.menuButton.Text = "Main Menu";
             this.menuButton.UseVisualStyleBackColor = false;
             this.menuButton.Click += new System.EventHandler(this.menuButton_Click);
+            this.menuButton.Enter += new System.EventHandler(this.menuButton_Enter);
+            this.menuButton.Leave += new System.EventHandler(this.menuButton_Leave);
             // 
             // HighScreen
             // 
@@ -90,7 +91,6 @@ namespace BrickBreaker
             this.Load += new System.EventHandler(this.HighScreen_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
-
 
         }
 

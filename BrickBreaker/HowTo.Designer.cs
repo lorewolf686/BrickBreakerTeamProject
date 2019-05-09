@@ -43,11 +43,16 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             this.SuspendLayout();
             // 
             // title
@@ -80,6 +85,9 @@
             this.playButton.TabIndex = 1;
             this.playButton.Text = "Play";
             this.playButton.UseVisualStyleBackColor = false;
+            this.playButton.Click += new System.EventHandler(this.playButton_Click);
+            this.playButton.Enter += new System.EventHandler(this.playButton_Enter);
+            this.playButton.Leave += new System.EventHandler(this.playButton_Leave);
             // 
             // menuButton
             // 
@@ -99,6 +107,9 @@
             this.menuButton.TabIndex = 2;
             this.menuButton.Text = "Menu";
             this.menuButton.UseVisualStyleBackColor = false;
+            this.menuButton.Click += new System.EventHandler(this.menuButton_Click);
+            this.menuButton.Enter += new System.EventHandler(this.menuButton_Enter);
+            this.menuButton.Leave += new System.EventHandler(this.menuButton_Leave);
             // 
             // pictureBox1
             // 
@@ -198,7 +209,7 @@
             this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Font = new System.Drawing.Font("OCR A Std", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Cyan;
-            this.label5.Location = new System.Drawing.Point(663, 103);
+            this.label5.Location = new System.Drawing.Point(675, 103);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(93, 29);
             this.label5.TabIndex = 11;
@@ -210,7 +221,7 @@
             this.label6.BackColor = System.Drawing.Color.Transparent;
             this.label6.Font = new System.Drawing.Font("OCR A Std", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Cyan;
-            this.label6.Location = new System.Drawing.Point(563, 103);
+            this.label6.Location = new System.Drawing.Point(535, 103);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(73, 29);
             this.label6.TabIndex = 12;
@@ -225,7 +236,7 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(319, 66);
             this.label7.TabIndex = 13;
-            this.label7.Text = "Control Paddle With Arrows";
+            this.label7.Text = "Control P1 With Arrows";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pictureBox5
@@ -239,12 +250,63 @@
             this.pictureBox5.TabIndex = 14;
             this.pictureBox5.TabStop = false;
             // 
+            // pictureBox6
+            // 
+            this.pictureBox6.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox6.BackgroundImage = global::BrickBreaker.Properties.Resources.Player2;
+            this.pictureBox6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox6.Location = new System.Drawing.Point(540, 276);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(204, 43);
+            this.pictureBox6.TabIndex = 18;
+            this.pictureBox6.TabStop = false;
+            // 
+            // label8
+            // 
+            this.label8.BackColor = System.Drawing.Color.Transparent;
+            this.label8.Font = new System.Drawing.Font("OCR A Std", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.Cyan;
+            this.label8.Location = new System.Drawing.Point(482, 322);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(315, 66);
+            this.label8.TabIndex = 17;
+            this.label8.Text = "Control P2 With A and D";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.BackColor = System.Drawing.Color.Transparent;
+            this.label9.Font = new System.Drawing.Font("OCR A Std", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.Cyan;
+            this.label9.Location = new System.Drawing.Point(535, 244);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(33, 29);
+            this.label9.TabIndex = 16;
+            this.label9.Text = "A";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.BackColor = System.Drawing.Color.Transparent;
+            this.label10.Font = new System.Drawing.Font("OCR A Std", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.Cyan;
+            this.label10.Location = new System.Drawing.Point(711, 244);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(33, 29);
+            this.label10.TabIndex = 15;
+            this.label10.Text = "D";
+            // 
             // HowTo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::BrickBreaker.Properties.Resources.Stars;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.Controls.Add(this.pictureBox6);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.pictureBox5);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -263,11 +325,13 @@
             this.DoubleBuffered = true;
             this.Name = "HowTo";
             this.Size = new System.Drawing.Size(800, 550);
+            this.Load += new System.EventHandler(this.HowTo_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -290,5 +354,9 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.PictureBox pictureBox5;
+        private System.Windows.Forms.PictureBox pictureBox6;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
     }
 }

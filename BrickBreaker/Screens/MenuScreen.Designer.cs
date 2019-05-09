@@ -32,10 +32,8 @@
             this.exitButton = new System.Windows.Forms.Button();
             this.title = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.nameButton = new System.Windows.Forms.Button();
-            this.highButton = new System.Windows.Forms.Button();
-            this.showDebug = new System.Windows.Forms.CheckBox();
             this.coopBox = new System.Windows.Forms.CheckBox();
+            this.how = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // playButton
@@ -49,13 +47,15 @@
             this.playButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.playButton.Font = new System.Drawing.Font("OCR A Std", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.playButton.ForeColor = System.Drawing.Color.Cyan;
-            this.playButton.Location = new System.Drawing.Point(306, 281);
+            this.playButton.Location = new System.Drawing.Point(306, 240);
             this.playButton.Name = "playButton";
             this.playButton.Size = new System.Drawing.Size(181, 78);
             this.playButton.TabIndex = 0;
             this.playButton.Text = "Play";
             this.playButton.UseVisualStyleBackColor = false;
             this.playButton.Click += new System.EventHandler(this.playButton_Click);
+            this.playButton.Enter += new System.EventHandler(this.playButton_Enter);
+            this.playButton.Leave += new System.EventHandler(this.playButton_Leave);
             // 
             // exitButton
             // 
@@ -63,16 +63,20 @@
             this.exitButton.BackgroundImage = global::BrickBreaker.Properties.Resources.button;
             this.exitButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.exitButton.FlatAppearance.BorderSize = 0;
+            this.exitButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.exitButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.exitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.exitButton.Font = new System.Drawing.Font("OCR A Std", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.exitButton.ForeColor = System.Drawing.Color.Cyan;
-            this.exitButton.Location = new System.Drawing.Point(306, 365);
+            this.exitButton.Location = new System.Drawing.Point(306, 400);
             this.exitButton.Name = "exitButton";
             this.exitButton.Size = new System.Drawing.Size(181, 78);
-            this.exitButton.TabIndex = 1;
+            this.exitButton.TabIndex = 2;
             this.exitButton.Text = "Exit";
             this.exitButton.UseVisualStyleBackColor = false;
             this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
+            this.exitButton.Enter += new System.EventHandler(this.exitButton_Enter);
+            this.exitButton.Leave += new System.EventHandler(this.exitButton_Leave);
             // 
             // title
             // 
@@ -100,64 +104,41 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Brick Breaker";
             // 
-            // nameButton
-            // 
-            this.nameButton.BackColor = System.Drawing.Color.Transparent;
-            this.nameButton.BackgroundImage = global::BrickBreaker.Properties.Resources.button;
-            this.nameButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.nameButton.FlatAppearance.BorderSize = 0;
-            this.nameButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.nameButton.ForeColor = System.Drawing.Color.Cyan;
-            this.nameButton.Location = new System.Drawing.Point(534, 487);
-            this.nameButton.Name = "nameButton";
-            this.nameButton.Size = new System.Drawing.Size(92, 46);
-            this.nameButton.TabIndex = 4;
-            this.nameButton.Text = "Name Screen";
-            this.nameButton.UseVisualStyleBackColor = false;
-            this.nameButton.Visible = false;
-            this.nameButton.Click += new System.EventHandler(this.nameButton_Click);
-            // 
-            // highButton
-            // 
-            this.highButton.BackColor = System.Drawing.Color.Transparent;
-            this.highButton.BackgroundImage = global::BrickBreaker.Properties.Resources.button;
-            this.highButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.highButton.FlatAppearance.BorderSize = 0;
-            this.highButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.highButton.ForeColor = System.Drawing.Color.Cyan;
-            this.highButton.Location = new System.Drawing.Point(649, 487);
-            this.highButton.Name = "highButton";
-            this.highButton.Size = new System.Drawing.Size(92, 46);
-            this.highButton.TabIndex = 5;
-            this.highButton.Text = "HS Screen";
-            this.highButton.UseVisualStyleBackColor = false;
-            this.highButton.Visible = false;
-            this.highButton.Click += new System.EventHandler(this.highButton_Click);
-            // 
-            // showDebug
-            // 
-            this.showDebug.AutoSize = true;
-            this.showDebug.BackColor = System.Drawing.Color.Transparent;
-            this.showDebug.ForeColor = System.Drawing.Color.Cyan;
-            this.showDebug.Location = new System.Drawing.Point(607, 426);
-            this.showDebug.Name = "showDebug";
-            this.showDebug.Size = new System.Drawing.Size(136, 17);
-            this.showDebug.TabIndex = 6;
-            this.showDebug.Text = "Show Debug Shortcuts";
-            this.showDebug.UseVisualStyleBackColor = false;
-            // 
             // coopBox
             // 
             this.coopBox.AutoSize = true;
             this.coopBox.BackColor = System.Drawing.Color.Transparent;
             this.coopBox.ForeColor = System.Drawing.Color.Cyan;
-            this.coopBox.Location = new System.Drawing.Point(493, 317);
+            this.coopBox.Location = new System.Drawing.Point(493, 276);
             this.coopBox.Name = "coopBox";
             this.coopBox.Size = new System.Drawing.Size(92, 17);
-            this.coopBox.TabIndex = 7;
+            this.coopBox.TabIndex = 3;
             this.coopBox.Text = "2-Player Coop";
             this.coopBox.UseVisualStyleBackColor = false;
             this.coopBox.CheckedChanged += new System.EventHandler(this.coopBox_CheckedChanged);
+            this.coopBox.Enter += new System.EventHandler(this.coopBox_Enter);
+            this.coopBox.Leave += new System.EventHandler(this.coopBox_Leave);
+            // 
+            // how
+            // 
+            this.how.BackColor = System.Drawing.Color.Transparent;
+            this.how.BackgroundImage = global::BrickBreaker.Properties.Resources.button;
+            this.how.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.how.FlatAppearance.BorderSize = 0;
+            this.how.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.how.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.how.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.how.Font = new System.Drawing.Font("OCR A Std", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.how.ForeColor = System.Drawing.Color.Cyan;
+            this.how.Location = new System.Drawing.Point(306, 320);
+            this.how.Name = "how";
+            this.how.Size = new System.Drawing.Size(181, 78);
+            this.how.TabIndex = 1;
+            this.how.Text = "How To Play";
+            this.how.UseVisualStyleBackColor = false;
+            this.how.Click += new System.EventHandler(this.how_Click);
+            this.how.Enter += new System.EventHandler(this.how_Enter);
+            this.how.Leave += new System.EventHandler(this.how_Leave);
             // 
             // MenuScreen
             // 
@@ -166,10 +147,8 @@
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.BackgroundImage = global::BrickBreaker.Properties.Resources.Stars;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.Controls.Add(this.how);
             this.Controls.Add(this.coopBox);
-            this.Controls.Add(this.showDebug);
-            this.Controls.Add(this.highButton);
-            this.Controls.Add(this.nameButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.exitButton);
             this.Controls.Add(this.playButton);
@@ -178,19 +157,18 @@
             this.Size = new System.Drawing.Size(800, 550);
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion
 
         private System.Windows.Forms.Button playButton;
-        private System.Windows.Forms.Button exitButton;
         private System.Windows.Forms.Label title;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button howButton;
-        private System.Windows.Forms.Button nameButton;
-        private System.Windows.Forms.Button highButton;
-        private System.Windows.Forms.CheckBox showDebug;
         private System.Windows.Forms.CheckBox coopBox;
+        private System.Windows.Forms.Button how;
+        private System.Windows.Forms.Button exitButton;
     }
 
 }

@@ -44,5 +44,15 @@ namespace BrickBreaker
 				highScores.Text += i + ". " + Form1.highScores[i].name + " - " + Form1.highScores[i].score + "\n" + "\n";
 			}	
 		}
+
+        private void menuButton_Enter(object sender, EventArgs e)
+        {
+            menuButton.BackgroundImage = (Properties.Resources.purpbutton);
+        }
+
+        private void menuButton_Leave(object sender, EventArgs e)
+        {
+            menuButton.BackgroundImage = (Properties.Resources.button);
+        }
     }
 }

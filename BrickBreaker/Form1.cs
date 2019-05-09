@@ -89,6 +89,9 @@ namespace BrickBreaker
                 case "NameScreen":
                     ns = new NameScreen1();
                     break;
+                case "HowTo":
+                    ns = new HowTo();
+                    break;
             }
             //centres on the screen
             ns.Location = new Point((f.Width - ns.Width) / 2, (f.Height - ns.Height) / 2);
