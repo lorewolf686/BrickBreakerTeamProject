@@ -47,26 +47,23 @@ namespace BrickBreaker
 
             Rectangle ballRec = new Rectangle(x, y, size, size);
 
-            if (ballRec.IntersectsWith(blockTopRec) && ySpeed > 0)
-            {
-                ySpeed = ySpeed * -1;
-                otherCollide.Play();
-            }
-            else if (ballRec.IntersectsWith(blockBotRec) && ySpeed < 0)
-            {
-                ySpeed = ySpeed * -1;
-                otherCollide.Play();
-            }
-            else if (ballRec.IntersectsWith(blockLeftRec) && xSpeed > 0)
+            if (ballRec.IntersectsWith(blockLeftRec) && xSpeed > 0)
             {
                 xSpeed = xSpeed * -1;
-                otherCollide.Play();
             }
             else if (ballRec.IntersectsWith(blockRightRec) && xSpeed < 0)
             {
                 xSpeed = xSpeed * -1;
-                otherCollide.Play();
             }
+            else if (ballRec.IntersectsWith(blockTopRec) && ySpeed > 0)
+            {
+                ySpeed = ySpeed * -1;
+            }
+            else if (ballRec.IntersectsWith(blockBotRec) && ySpeed < 0)
+            {
+                ySpeed = ySpeed * -1;
+            }
+            
 
             if (blockBotRec.IntersectsWith(ballRec) || blockTopRec.IntersectsWith(ballRec) || blockLeftRec.IntersectsWith(ballRec) || blockRightRec.IntersectsWith(ballRec))
             {
