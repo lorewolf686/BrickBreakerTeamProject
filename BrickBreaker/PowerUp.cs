@@ -37,7 +37,7 @@ namespace BrickBreaker
                     colour = Color.Red;
                     break;
                 case 4:
-                    colour = Color.DeepPink;
+                    colour = Color.Fuchsia;
                     break;
                 case 5:
                     colour = Color.White;
