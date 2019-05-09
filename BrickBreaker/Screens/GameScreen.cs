@@ -96,12 +96,15 @@ namespace BrickBreaker
             int xSpeed = 6;
             int ySpeed = 6;
             int ballSize = 20;
-            ball = new Ball(ballX, ballY, xSpeed, ySpeed, ballSize);
-            ballList.Add(ball);
+            ballList.Add(ball = new Ball(ballX, ballY, xSpeed, ySpeed, ballSize));
+ 
 
-            
+            //Soundplayer
+            SoundPlayer music = new SoundPlayer(Properties.Resources.backMusic);
 
 
+
+            //
             NewLevel();
 
             // start the game engine loop
@@ -248,7 +251,7 @@ namespace BrickBreaker
                 foreach (PowerUp p in powers)
                 {
                     p.Move();
-                    if (p.PowerUpCollision(paddle)||p.PowerUpCollision(paddle2))
+                    if (p.PowerUpCollision(paddle))
                     {
 
                         p.UpdatePowerUp();
@@ -256,6 +259,14 @@ namespace BrickBreaker
                         powers.Remove(powers[0]);
                         break;
                     }
+
+                    if (Form1.twoPlayer && p.PowerUpCollision(paddle2))
+                    {
+                    p.UpdatePowerUp();
+
+                    powers.Remove(powers[0]);
+                    break;
+                }
                     //delete power up if it goes off the screen
                     if (p.y > paddle.y + 30)
                     {
@@ -457,8 +468,10 @@ namespace BrickBreaker
                 e.Graphics.DrawImage(Properties.Resources.Player2, paddle2.x, paddle2.y);
             }
             //Draw Ball
-            e.Graphics.DrawImage(Properties.Resources.ball, ball.x, ball.y);
-
+            foreach (Ball b in ballList)
+            {
+                e.Graphics.DrawImage(Properties.Resources.ball, b.x, b.y);
+            }
             // Draws blocks
             foreach (Block b in blocks)
             {

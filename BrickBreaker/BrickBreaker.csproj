@@ -68,6 +68,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="HowTo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HowTo.Designer.cs">
+      <DependentUpon>HowTo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Paddle.cs" />
     <Compile Include="PowerUp.cs" />
     <Compile Include="Program.cs" />
@@ -104,6 +110,9 @@
     </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HowTo.resx">
+      <DependentUpon>HowTo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -203,6 +212,7 @@
   <ItemGroup>
     <None Include="Resources\Level4.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -230,6 +240,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Powerup.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Level6.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
