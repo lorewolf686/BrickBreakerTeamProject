@@ -403,7 +403,7 @@ namespace BrickBreaker
             //redraw the screen
             Refresh();
         }
-
+        
 
         private void LevelLoad(string levelNo)
         {
@@ -414,7 +414,7 @@ namespace BrickBreaker
             }
             catch
             {
-                Form1.ChangeScreen(this, "HighScreen");
+                Form1.ChangeScreen(this, "NameScreen");
                 brickReader = XmlReader.Create("Resources/Level1.xml");
             }
 
@@ -448,7 +448,7 @@ namespace BrickBreaker
 
         {
             //MenuScreen ps = new MenuScreen();
-            Form1.ChangeScreen(this, "HighScreen");
+            Form1.ChangeScreen(this, "NameScreen");
 
         }
 

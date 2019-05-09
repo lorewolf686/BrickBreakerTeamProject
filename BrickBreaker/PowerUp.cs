@@ -73,7 +73,7 @@ namespace BrickBreaker
                     GameScreen.score = GameScreen.score + 2000;
                     break;
                 case 5:
-                    GameScreen.score = GameScreen.lives++;
+                    GameScreen.lives = GameScreen.lives++;
                     break;
                 default:
                     break;
